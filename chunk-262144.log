@@ -1,0 +1,44 @@
+# Let write role testing create the file
+rm -f /usr/tdrs/data/archdev/tf135c/datafile
+/usr/bin/time -p ./backbencher -n4096000000 -c 262144 /usr/tdrs/data/archdev/tf135c/datafile
+   Role: Writing
+ Method: read(2) / write(2)
+    End: 1168620780.057710
+  Start: 1168620772.864382
+Seconds: 7.193328
+  Bytes: 4096000000.000000
+   Rate: 5.69417e+08
+ BlkSiz: 262144
+ls -lh /usr/tdrs/data/archdev/tf135c/datafile
+-rw-r-----  1 tf135c blaster 3.9G Jan 12 08:53 /usr/tdrs/data/archdev/tf135c/datafile
+rm -f /usr/tdrs/data/archdev/tf135c/datafile
+/usr/bin/time -p ./backbencher -m -n4096000000 -c 262144 /usr/tdrs/data/archdev/tf135c/datafile
+   Role: Writing
+ Method: mmap(2) / munmap(2)
+    End: 1168620793.647438
+  Start: 1168620780.112783
+Seconds: 13.534655
+  Bytes: 4096000000.000000
+   Rate: 3.02631e+08
+ BlkSiz: 262144
+ls -lh /usr/tdrs/data/archdev/tf135c/datafile
+-rw-r-----  1 tf135c blaster 3.9G Jan 12 08:53 /usr/tdrs/data/archdev/tf135c/datafile
+# Do read role testing using leftover data file
+/usr/bin/time -p ./backbencher -r -n4096000000 -c 262144 /usr/tdrs/data/archdev/tf135c/datafile
+   Role: Reading
+ Method: read(2) / write(2)
+    End: 1168620814.345673
+  Start: 1168620804.889973
+Seconds: 9.455700
+  Bytes: 4096000000.000000
+   Rate: 4.33178e+08
+ BlkSiz: 262144
+/usr/bin/time -p ./backbencher -rm -n4096000000 -c 262144 /usr/tdrs/data/archdev/tf135c/datafile
+   Role: Reading
+ Method: mmap(2) / munmap(2)
+    End: 1168620829.194662
+  Start: 1168620814.349232
+Seconds: 14.845430
+  Bytes: 4096000000.000000
+   Rate: 2.7591e+08
+ BlkSiz: 262144
