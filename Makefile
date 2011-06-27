@@ -19,10 +19,9 @@ SUBDIRS	=
 
 .PHONY:	${TARGETS} ${SUBDIRS}
 
-CCMODE	=32
-CC	=ccache gcc -m${CCMODE} -std=gnu99
+CC	=gcc -mtune=native -std=gnu99
 INC	=-I.
-CFLAGS	=-Os -Wall -Wextra -Werror -pedantic -g 
+CFLAGS	=-Os -Wall -Wextra -Werror -pedantic -g
 CFLAGS	+=`getconf LFS_CFLAGS`
 CFLAGS	+=${DEFS}
 CFLAGS	+=${INC}
